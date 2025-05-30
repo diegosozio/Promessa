@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Promessa di matrimonio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      font-family: "Lovely Coffee", cursive;
+      margin: 0;
+      padding: 0;
+      background: #93a996;
+      text-align: center;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .envelope {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .line {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 2px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+      transition: transform 1s ease, opacity 1s ease;
+      z-index: 1;
+    }
+
+    .right-line { left: calc(50%); }
+
+    .open .left-line { transform: translateX(-100px); opacity: 0; }
+    .open .right-line { transform: translateX(100px); opacity: 0; }
+
+    .seal {
+      width: 120px;
+      cursor: pointer;
+      z-index: 2;
+      transition: transform 0.5s;
+    }
+
+    .seal:active { transform: scale(0.95); }
+
+    .invito {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 2rem 1rem;
+      box-sizing: border-box;
+    }
+
+    .invito img {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .domanda {
+      margin-top: 2rem;
+    }
+
+    .domanda p {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.5rem;
+      color: #000000;
+      margin-bottom: 1rem;
+    }
+
+    .bottoni {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .bottoni a {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      text-decoration: none;
+      background-color: #c4a48a;
+      color: white;
+      border-radius: 5px;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+
+    .bottoni a:hover {
+      background-color: #843534;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <div class="envelope" id="busta">
+    <div class="line left-line"></div>
+    <div class="line right-line"></div>
+    <img src="img/timbro.png" alt="Sigillo in ceralacca" class="seal" onclick="apriInvito()" />
+  </div>
+
+  <div class="invito" id="invito">
+    <img src="img/invito.png" alt="Invito" />
+    <div class="domanda">
+      <p>Sarai presente?</p>
+      <div class="bottoni">
+        <a id="whatsapp-btn-si">Sì</a>
+        <a id="whatsapp-btn-no">No</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function apriInvito() {
+      const busta = document.getElementById('busta');
+      busta.classList.add('open');
+      setTimeout(() => {
+        busta.style.display = 'none';
+        document.getElementById('invito').style.display = 'block';
+      }, 1000);
+    }
+
+    // WhatsApp Confirmation Message
+    document.getElementById("whatsapp-btn-no").href="https://api.whatsapp.com/send?phone=+393405407313&text=Ciao Laura e Diego! purtroppo non saremo presenti al vostro matrimonio"
+    document.getElementById("whatsapp-btn-si").href="https://api.whatsapp.com/send?phone=+393405407313&text=Ciao Laura e Diego! 🎉%0A%0ASiamo felicissimi di partecipare alla vostra promessa di matrimonio!%0A%0ASaremo in *[inserisci numero]* persone"
+
+  </script>
+
+</body>
+</html>
